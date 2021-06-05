@@ -7,7 +7,7 @@ from stem.control import Controller
 
 
 class ProxyManager:
-    def __init__(self, password, reset_after=2):
+    def __init__(self, password, reset_after=None):
         self.reset_after = reset_after
         self.request_count = 0
         self.password = password
@@ -38,7 +38,7 @@ class ProxyManager:
 
         self.updating_ip = True
 
-        if self.request_count >= self.reset_after:
+        if (self.reset_after is not None) and (self.request_count >= self.reset_after):
             self.renew_connection()
             self.request_count = 0
 
